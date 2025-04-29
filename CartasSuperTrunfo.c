@@ -5,7 +5,7 @@ de duas cartas do Super Trunfo.
 */
 int main() {
     char estado1, estado2;
-    char codcarta1[8], codcarta2[8];
+    char codcarta1[4], codcarta2[4];
     char cidade1[20], cidade2[20];
     double populacao1, populacao2;
     float area1, area2;
@@ -17,7 +17,7 @@ int main() {
     scanf(" %c", &estado1);
 
     printf("escolha o codigo da carta, deve A letra do estado escolhido,\nseguida de um número de 01 a 04 (ex: A01, B03):\n");
-    scanf("%s", &codcarta1);
+    scanf("%3s", codcarta1);
 
     printf("Digite o nome da Cidade escolhida: \n");
     scanf("%s", cidade1);
@@ -41,7 +41,7 @@ int main() {
     scanf(" %c", &estado2);
 
     printf("escolha o codigo da carta, deve A letra do estado escolhido,\nseguida de um número de 01 a 04 (ex: A01, B03):\n");
-    scanf("%s", &codcarta2);
+    scanf("%3s", codcarta2);
  
     printf("Digite o nome da Cidade escolhida: \n");
     scanf("%s", cidade2);
