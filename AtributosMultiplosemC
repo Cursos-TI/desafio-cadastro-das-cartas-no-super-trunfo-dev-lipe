@@ -1,0 +1,184 @@
+#include <stdio.h>
+
+int main() {
+    // Dados das cartas
+    char nome1[50], nome2[50];
+    int populacao1, populacao2;
+    float area1, area2;
+    float pib1, pib2;
+    int pontos1, pontos2;
+    float densidade1, densidade2;
+
+    // Atributos escolhidos e seus nomes
+    int atributo1 = 0, atributo2 = 0;
+    const char *nomeAtributo1, *nomeAtributo2;
+
+    // Valores dos atributos selecionados
+    float valor1a = 0, valor2a = 0;
+    float valor1b = 0, valor2b = 0;
+
+    // Pontuação por atributos vencidos
+    int pontosVencidos1 = 0, pontosVencidos2 = 0;
+
+    // === Dados da carta 1 ===
+    printf("Digite o nome do país 1: ");
+    scanf(" %[^\n]", nome1);
+    printf("População: ");
+    scanf("%d", &populacao1);
+    printf("Área (km²): ");
+    scanf("%f", &area1);
+    printf("PIB (em bilhões): ");
+    scanf("%f", &pib1);
+    printf("Número de pontos turísticos: ");
+    scanf("%d", &pontos1);
+    densidade1 = populacao1 / area1;
+
+    // === Dados da carta 2 ===
+    printf("\nDigite o nome do país 2: ");
+    scanf(" %[^\n]", nome2);
+    printf("População: ");
+    scanf("%d", &populacao2);
+    printf("Área (km²): ");
+    scanf("%f", &area2);
+    printf("PIB (em bilhões): ");
+    scanf("%f", &pib2);
+    printf("Número de pontos turísticos: ");
+    scanf("%d", &pontos2);
+    densidade2 = populacao2 / area2;
+
+    // === Menu para o primeiro atributo ===
+    printf("\nEscolha o primeiro atributo para comparação:\n");
+    printf("1 - População\n");
+    printf("2 - Área\n");
+    printf("3 - PIB\n");
+    printf("4 - Pontos turísticos\n");
+    printf("5 - Densidade demográfica\n");
+    printf("Digite a opção: ");
+    scanf("%d", &atributo1);
+
+    // === Menu para o segundo atributo ===
+    printf("\nEscolha o segundo atributo para comparação (diferente do primeiro):\n");
+    if (atributo1 != 1) printf("1 - População\n");
+    if (atributo1 != 2) printf("2 - Área\n");
+    if (atributo1 != 3) printf("3 - PIB\n");
+    if (atributo1 != 4) printf("4 - Pontos turísticos\n");
+    if (atributo1 != 5) printf("5 - Densidade demográfica\n");
+    printf("Digite a opção: ");
+    scanf("%d", &atributo2);
+
+    // === Verificação ===
+    if (atributo1 == atributo2 || atributo1 < 1 || atributo1 > 5 || atributo2 < 1 || atributo2 > 5) {
+        printf("\nErro: escolha inválida de atributos!\n");
+        return 1;
+    }
+
+    // === Coletar os valores e nomes dos atributos ===
+    switch (atributo1) {
+        case 1:
+         valor1a = populacao1;
+         valor2a = populacao2;
+         nomeAtributo1 = "População"; 
+        break;
+        case 2:
+         valor1a = area1;
+         valor2a = area2;
+         nomeAtributo1 = "Área";
+        break;
+        case 3:
+         valor1a = pib1;
+         valor2a = pib2;
+         nomeAtributo1 = "PIB";
+        break;
+        case 4:
+         valor1a = pontos1;
+         valor2a = pontos2;
+         nomeAtributo1 = "Pontos turísticos";
+        break;
+        case 5:
+         valor1a = densidade1;
+         valor2a = densidade2;
+         nomeAtributo1 = "Densidade demográfica";
+        break;
+    }
+
+    switch (atributo2) {
+        case 1:
+         valor1b = populacao1; 
+         valor2b = populacao2; 
+         nomeAtributo2 = "População";
+        break;
+        case 2:
+         valor1b = area1;
+         valor2b = area2;
+         nomeAtributo2 = "Área";
+        break;
+        case 3:
+         valor1b = pib1;
+         valor2b = pib2;       
+         nomeAtributo2 = "PIB"; 
+        break;
+        case 4:
+         valor1b = pontos1;
+         valor2b = pontos2;
+         nomeAtributo2 = "Pontos turísticos"; 
+        break;
+        case 5:
+         valor1b = densidade1;
+         valor2b = densidade2;
+         nomeAtributo2 = "Densidade demográfica";
+        break;
+    }
+
+    // === Exibir valores dos atributos escolhidos ===
+    printf("\n----- RESULTADO DA COMPARAÇÃO -----\n");
+    printf("País 1: %s\n", nome1);
+    printf("País 2: %s\n\n", nome2);
+
+    printf("Atributo 1 (%s): %.2f x %.2f\n", nomeAtributo1, valor1a, valor2a);
+    printf("Atributo 2 (%s): %.2f x %.2f\n", nomeAtributo2, valor1b, valor2b);
+
+    // === Comparação dos atributos (sem inverter valores) ===
+    pontosVencidos1 = 0;
+    pontosVencidos2 = 0;
+
+    // Comparar primeiro atributo
+    if (atributo1 == 5) { // Densidade demográfica: menor vence
+        if (valor1a < valor2a)
+            pontosVencidos1++;
+        else if (valor2a < valor1a)
+            pontosVencidos2++;
+    } else { // Outros atributos: maior vence
+        if (valor1a > valor2a)
+            pontosVencidos1++;
+        else if (valor2a > valor1a)
+            pontosVencidos2++;
+    }
+
+    // Comparar segundo atributo
+    if (atributo2 == 5) { // Densidade demográfica: menor vence
+        if (valor1b < valor2b)
+            pontosVencidos1++;
+        else if (valor2b < valor1b)
+            pontosVencidos2++;
+    } else { // Outros atributos: maior vence
+        if (valor1b > valor2b)
+            pontosVencidos1++;
+        else if (valor2b > valor1b)
+            pontosVencidos2++;
+    }
+
+    // === Mostrar resultado final ===
+    printf("\nNúmero de atributos vencidos:\n");
+    printf("%s: %d\n", nome1, pontosVencidos1);
+    printf("%s: %d\n", nome2, pontosVencidos2);
+
+    if (pontosVencidos1 > pontosVencidos2) {
+        printf("\nVencedor: %s\n", nome1);
+    } else if (pontosVencidos2 > pontosVencidos1) {
+        printf("\nVencedor: %s\n", nome2);
+    } else {
+        printf("\nEmpate!\n");
+    }
+
+    return 0;
+}
